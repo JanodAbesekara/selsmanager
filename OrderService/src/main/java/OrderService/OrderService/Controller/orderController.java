@@ -30,6 +30,11 @@ public class orderController {
     public orderDTO getunique(@RequestParam Long id){
         return  orderService.getuniqueuser(id);
     }
+    
+    @DeleteMapping("/DeltebyID")
+    public orderDTO deletebyID(@RequestParam Long id){
+        return orderService.deleteorder(id);
+    }
 
-
+  
 }

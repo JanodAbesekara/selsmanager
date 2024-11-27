@@ -47,5 +47,19 @@ public class OrderService {
 
     }
 
+    public orderDTO deleteorder(Long id){
+        if(id == null){
+            throw new RuntimeException("Id is null");
+        }
+        else{
+            Optional<orders> optionalOrders = orderRepo.findById(id);
+            if (optionalOrders.isEmpty()) {
+                throw new RuntimeException("Order not found for id: " + id);
+            }
+            orderRepo.deleteById(id);
+            return modelMapper.map(optionalOrders.get(), orderDTO.class);
+        }
+    }
+
 
 }
