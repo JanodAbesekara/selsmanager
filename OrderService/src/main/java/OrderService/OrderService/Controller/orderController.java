@@ -35,6 +35,10 @@ public class orderController {
     public orderDTO deletebyID(@RequestParam Long id){
         return orderService.deleteorder(id);
     }
-
+ 
+    @PutMapping("/UpdatebyID")
+    public orderDTO updatebyID(@RequestParam Long id, @RequestBody orderDTO orderDTO){
+        return orderService.updateorder(id, orderDTO);
+    }
   
 }

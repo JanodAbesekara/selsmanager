@@ -61,5 +61,24 @@ public class OrderService {
         }
     }
 
+    public orderDTO updateorder(Long id, orderDTO orderDTO){
+        if(id == null){
+            throw new RuntimeException("Id is null");
+        }
+        else{
+            Optional<orders> optionalOrders = orderRepo.findById(id);
+            if (optionalOrders.isEmpty()) {
+                throw new RuntimeException("Order not found for id: " + id);
+            }
+            orders orders = optionalOrders.get();
+            orders.setOrderName(orderDTO.getOrderName());
+            orders.setOrderPrice(orderDTO.getOrderPrice());
+            orders.setOrderQuantity(orderDTO.getOrderQuantity());
+            orders.setOrderDescription(orderDTO.getOrderDescription());
+            orders.setOrderDate(orderDTO.getOrderDate());
+            orderRepo.save(orders);
+            return modelMapper.map(orders, orderDTO.class);
+        }
+    }
 
 }
